@@ -1,0 +1,13 @@
+[게시판 예제]
+
+*패키지와 클래스들
+days.ui	-	DaysMain, DaysUI
+days.vo	-	DaysVO	
+days.dao	-	MybatisConfig, DaysDAO, DaysMapper
+
+*src 폴더 밑에 존재하는 것
+days.sql 				
+DaysMapper.xml 		
+db.properties		
+Mybatis_Days.txt		
+mybatis-config.xml 		

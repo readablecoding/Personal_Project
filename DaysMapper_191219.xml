@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 글 처리 SQL -->
+<mapper namespace="days.dao.DaysMapper"> 
+
+<!-- 글 저장-->
+<insert id="writeDays" parameterType="days"> 
+
+insert into days (
+	num
+	, id
+	, title
+	, sdate
+	, edate
+)
+values (
+	days_seq.nextval
+	, #{id}
+	, #{title} 
+	, #{sdate}
+	,  #{edate}
+)	
+</insert>  
+
+<!-- 글 1개 읽기 또는 모든 글 읽기 -->
+<select id ="readDays" parameterType="int" resultType="days">  
+select 
+	num
+	,id
+	,title
+	,sdate
+	,edate
+	,wrdate
+from 
+	days 
+<if test = "_parameter != 0"> 
+where 
+	num = #{num} 
+</if>		
+order by
+	num desc					
+</select>
+
+<!-- 글 삭제 -->
+<delete id = "deleteDays" parameterType = "int">
+delete from 
+	days 
+where 
+	num = #{num}
+</delete>
+
+<!-- 글 수정 -->
+<update id ="updateDays" parameterType = "days">
+update 
+	days
+set 
+	num = #{num}	
+	<if test ="title != null and title != ''">
+	,title = #{title}
+	</if>
+	<if test ="sdate != null and sdate != ''">	
+	, sdate = #{sdate} 
+	</if>
+	<if test ="edate != null and edate != ''">
+	, edate = #{edate}
+	</if>
+where 
+	num = #{num}
+</update>
+
+<!-- 글 검색 -->
+<select id = "searchDays" parameterType ="map" resultType ="days"> 
+select
+	*
+from 
+	days 
+<where> 
+	<if test ="type == 1">		
+	upper(title) like '%' || upper(#{word}) || '%'	
+	</if>
+	<if test ="type == 2">
+	upper(sdate) like '%' || upper(#{word}) || '%'  
+	</if>
+</where>
+order by 
+	num desc
+</select>
+ 
+</mapper>

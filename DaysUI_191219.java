@@ -23,24 +23,23 @@ public class DaysUI
 				{
 					case 1:
 						write();
-						continue;
+						break;
 					case 2:
 						update();
-						continue;
+						break;
 					case 3:
 						read();
-						continue;
+						break;
 					case 4:
 						search();
-						continue;
+						break;
 					case 5:
 						delete();
-						continue;
+						break;
 					case 0:
 					System.out.println("프로그램을 종료합니다.");
 					return;				
 				}
-				break;
 			}
 		}
 

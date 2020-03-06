@@ -1,0 +1,22 @@
+-- DML / DDL 명령문을 작성
+
+
+create table idea_member(
+    userid varchar2(20) primary key
+    ,userpwd varchar2(20) not null
+);
+
+create table idea_info(
+    infonum number primary key
+    ,userid varchar2(20) not null
+    ,title varchar2(100) not null
+    ,content varchar2(2000) not null    
+    ,inputdate date default sysdate
+    ,constraint idea_fk foreign key(userid)
+        references idea_member(userid)
+);
+
+create sequence idea_seq;
+
+
+ 

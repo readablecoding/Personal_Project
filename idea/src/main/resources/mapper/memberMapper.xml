@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sesoc.idea.dao.MemberMapper">
+	<!--회원 가입  -->
+	<insert id="signup" parameterType="MemberVO">
+		insert into
+			idea_member
+		values(
+			#{userid}
+			,#{userpwd}
+		)
+	</insert>
+	
+	<!--로그인  -->
+	<select id="login" parameterType="MemberVO" resultType="int">
+		select
+			count(*)
+		from
+			idea_member
+		where
+			userid = #{userid}
+			and
+			userpwd = #{userpwd}
+	
+	</select>
+	
+	<!--회원정보 수정  -->
+	<update id="memberUpdate" parameterType="MemberVO"> 
+		update
+			idea_member
+		set
+			userpwd = #{userpwd}
+		where
+			userid = #{userid}
+	</update>
+	
+	<!--회원 탈퇴  -->
+	<delete id="memberOut" parameterType="string">
+		delete from
+			idea_member
+		where
+			userid = #{userid}
+	</delete>
+</mapper>
+

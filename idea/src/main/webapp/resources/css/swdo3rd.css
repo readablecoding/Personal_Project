@@ -1,0 +1,30 @@
+@charset "UTF-8";
+div.center{
+	text-align: center;
+}
+
+input[value='가입']{
+	margin-right: 40px;
+}
+
+input[value='로그인']{
+	margin-right: 40px;
+}
+
+input[value='수정']{
+	margin-right: 40px;
+}
+
+input[value='삭제']{
+	margin-right: 40px;
+}
+
+
+table.line{
+	border: 1px solid black;
+	border-color: black;
+}
+
+body{
+	background-color: Thistle;
+}

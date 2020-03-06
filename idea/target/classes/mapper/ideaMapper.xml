@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sesoc.idea.dao.IdeaMapper">
+	
+	<!--아이디어 등록  -->
+	<insert id="ideaWrite" parameterType="IdeaVO">
+		insert into
+			idea_info(
+				infonum
+				,userid
+				,title
+				,content	
+			)
+		values(
+			idea_seq.nextval
+			, #{userid}
+			, #{title}
+			, #{content}
+			)
+	</insert>
+	
+	<!--아이디어 리스트  -->
+	<select id="ideaList" parameterType="string" resultType="IdeaVO">
+		select 
+			infonum
+			,title
+			,to_char(inputdate, 'yyyy-MM-dd') as inputdate
+		from
+			idea_info
+		where
+			userid = #{userid}
+		order by
+			infonum desc
+	</select>
+	
+	<!--아이디어 읽기  -->
+	<select id="ideaRead" parameterType="int" resultType="IdeaVO">
+		select
+			infonum
+			,title
+			,content
+		from
+			idea_info
+		where
+			infonum = #{infonum} 	
+	</select>
+	
+	<!--아이디어 업데이트  -->
+	<update id="ideaUpdate" parameterType="IdeaVO">
+	update
+		idea_info
+	set
+		content = #{content}
+		,title = #{title}
+	where
+		userid = #{userid}
+		and
+		infonum = #{infonum}
+	</update>
+	
+	<!--아이디어 삭제  -->
+	<delete id="ideaRemove" parameterType="IdeaVO">
+		delete from
+			idea_info
+		where
+			infonum = #{infonum}
+			and
+			userid = #{userid}
+	</delete>
+	
+	<!--아이디어 개수  -->
+	<select id="ideaCount" parameterType="string" resultType="int">
+	select
+		count(*)
+	from
+		idea_info
+	where
+		userid = #{userid}
+	</select>
+	
+	<!--페이징을 사용한 아이디어 리스트 -->
+	<select id="ideaListPaging" parameterType="string" resultType="hashmap">
+		select 
+			infonum
+			,title
+			,to_char(inputdate, 'yyyy-MM-dd') as inputdate
+		from
+			idea_info
+		where
+			userid = #{userid}
+		order by
+			infonum desc
+	</select>
+</mapper>
+
